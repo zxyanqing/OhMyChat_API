@@ -39,12 +39,12 @@ class GetAPI(AIGUI):
             "Cache-Control": "no-cache",
             "Connection": "keep-alive",
             "Content-Type": "application/json",
-            "Origin": "http://postfixmail.cn:3000",
+
             "Pragma": "no-cache",
-            "Referer": "http://postfixmail.cn:3000/",
+
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
         }
-        url = "http://postfixmail.cn:9988/api/send-message"
+        url = "your_url"
         data = {
             "message": query,
             "userId": self.uuid__,
@@ -56,7 +56,7 @@ class GetAPI(AIGUI):
                 response = requests.post(url, headers=headers, data=data, stream=True, timeout=10)
                 if response.status_code!=200:
                     return
-                response = requests.get(f"http://postfixmail.cn:9988/api/bot-sse/{self.uuid__}",
+                response = requests.get(f"your_url",
                                         headers=headers, verify=False, stream=True, timeout=10)
                 for index, line in enumerate(response.iter_lines()):
                     yield bytes.decode(line), index
